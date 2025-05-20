@@ -2,14 +2,26 @@ import { Injectable } from '@nestjs/common';
 import { CreateDiaryEntryDto } from './dto/create-diary-entry.dto';
 import { UpdateDiaryEntryDto } from './dto/update-diary-entry.dto';
 
+type DiaryEntry = CreateDiaryEntryDto & { id: number; createdAt: Date };
+
 @Injectable()
 export class DiaryEntryService {
-  create(createDiaryEntryDto: CreateDiaryEntryDto) {
-    return 'This action adds a new diaryEntry';
+  private entries: DiaryEntry[] = [];
+  private idCounter = 1;
+
+  create(entryDto: CreateDiaryEntryDto): DiaryEntry {
+    const newEntry: DiaryEntry = {
+      id: this.idCounter++,
+      key: entryDto.key,
+      value: entryDto.value,
+      createdAt: new Date(),
+    };
+    this.entries.push(newEntry);
+    return newEntry;
   }
 
   findAll() {
-    return `This action returns all diaryEntry`;
+    return this.entries;
   }
 
   findOne(id: number) {

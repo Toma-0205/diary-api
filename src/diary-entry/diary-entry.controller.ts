@@ -8,8 +8,8 @@ export class DiaryEntryController {
   constructor(private readonly diaryEntryService: DiaryEntryService) {}
 
   @Post()
-  create(@Body() createDiaryEntryDto: CreateDiaryEntryDto) {
-    return this.diaryEntryService.create(createDiaryEntryDto);
+  create(@Body() dto: CreateDiaryEntryDto) {
+    return this.diaryEntryService.create(dto);
   }
 
   @Get()

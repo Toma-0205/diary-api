@@ -97,3 +97,12 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 ## License
 
 Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+
+
+## 処理の流れ
+
+①curlでPOST（JSON型で）
+②NestJSが（controller.tsで）@Post()メソッドに一致しているか確認（フィルタの役割）。create()を呼び出す。
+③TSによって、JSONが@Body()でDTO（TSクラス）のインスタンスに変換され、CreateDiaryEntryDtoにマッピング（割当）。
+④service.tsにデータが渡され、一時保存。
+⑤controllerからcurlにレスポンスされる。（NestJSがJSONに自動変換）
