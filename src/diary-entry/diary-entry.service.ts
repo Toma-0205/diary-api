@@ -22,12 +22,13 @@ export class DiaryEntryService {
   
   // ③SQLiteの操作
   // TypeORMはPromiseベースのためasync
-  async create(dto: CreateDiaryEntryDto): Promise<DiaryEntry> { //dtoはPOSTのBody, DairyEntryを返す。
+  async create(entryDto: CreateDiaryEntryDto): Promise<DiaryEntry> { //dtoはPOSTのBody, DairyEntryを返す。
     // dtoを基に作成
-    const entry = this.diaryRepo.create({
-      key: dto.key,
-      value: dto.value,
-    });
+    // const entry = this.diaryRepo.create({
+    //   key: dto.key,
+    //   value: dto.value,
+    // });
+    const entry = this.diaryRepo.create(entryDto); // DTO全体を渡す
     // DBに保存
     return this.diaryRepo.save(entry);
   }
