@@ -5,6 +5,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { DiaryEntry } from './diary-entry/entities/diary-entry.entity';
 import { DiaryEntryModule } from './diary-entry/diary-entry.module';
 
+// デコレーター（@Module）でNestJSにモジュールであると宣言
 @Module({
   // TypeORMを使用してSQLiteに接続
   imports: [
