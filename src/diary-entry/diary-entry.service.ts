@@ -28,7 +28,12 @@ export class DiaryEntryService {
     //   key: dto.key,
     //   value: dto.value,
     // });
-    const entry = this.diaryRepo.create(entryDto); // DTO全体を渡す
+    // DTOから余分なフィールドを取り除く
+    const { ...cleanDto } = entryDto; // 例として
+
+    // Entity生成
+    const entry = this.diaryRepo.create(cleanDto);
+    // const entry = this.diaryRepo.create(entryDto); // DTO全体を渡す
     // DBに保存
     return this.diaryRepo.save(entry);
   }

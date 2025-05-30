@@ -38,6 +38,9 @@ export class DiaryEntry {
 
   @CreateDateColumn()
   createdAt: Date;
+
+  @Column('json', { nullable: true })
+  customFields: { key: string; value: string }[];
   // @Column()›
   // key: string;
 

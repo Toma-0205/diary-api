@@ -11,4 +11,5 @@ export class CreateDiaryEntryDto {
     study: string;
     reading: string;
     other: string;
+    customFields?: { key: string; value: string }[];
 }
