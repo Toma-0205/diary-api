@@ -1,15 +1,35 @@
+import { IsNotEmpty, IsString } from 'class-validator';
+
 export class CreateDiaryEntryDto {
-    // key: string;    // 例: "sleepTime"
-    // value: string;  // 例: "23:30"
-    date: string;
-    wakeUpTime: string;
-    sleepTime: string;
-    breakfast: string;
-    lunch: string;
-    dinner: string;
-    workout: string;
-    study: string;
-    reading: string;
-    other: string;
-    customFields?: { key: string; value: string }[];
+    // IsNotEmptyは必須項目
+  @IsNotEmpty()
+  @IsString()
+  date: string;
+
+  @IsNotEmpty()
+  @IsString()
+  sleepTime: string;
+
+  @IsNotEmpty()
+  @IsString()
+  wakeUpTime: string;
+
+  @IsNotEmpty()
+  @IsString()
+  workout: string;
+
+  @IsNotEmpty()
+  @IsString()
+  study: string;
+
+  @IsNotEmpty()
+  @IsString()
+  reading: string;
+
+  breakfast: string;
+  lunch: string;
+  dinner: string;
+  other: string;
+
+  customFields?: { key: string; value: string }[];
 }
