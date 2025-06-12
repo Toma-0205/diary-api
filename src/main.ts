@@ -9,10 +9,15 @@ async function bootstrap() {
   // バリデーションを有効化
   app.useGlobalPipes(new ValidationPipe());
   // CORSを有効化（フロント5173→APIサーバ3000、別オリジンでの通信を許可）
-  app.enableCors();
+  // app.enableCors();
   // 指定する場合
   // app.enableCors({ origin: 'http://localhost:5173' }) 
 
+  app.enableCors({
+    origin: 'https://d3cfki9qvzwayq.cloudfront.net', // フロントエンドのドメインを許可
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    credentials: true,
+  });
   // PORT設定があればそれを使用、なければ3000を使用
   await app.listen(process.env.PORT ?? 3000);
 }
