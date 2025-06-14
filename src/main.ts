@@ -6,6 +6,8 @@ import { ValidationPipe } from '@nestjs/common'; // Validationを使用
 async function bootstrap() {
   // AppModuleでアプリを作成
   const app = await NestFactory.create(AppModule);
+
+  app.setGlobalPrefix('api');
   // バリデーションを有効化
   app.useGlobalPipes(new ValidationPipe());
   // CORSを有効化（フロント5173→APIサーバ3000、別オリジンでの通信を許可）
