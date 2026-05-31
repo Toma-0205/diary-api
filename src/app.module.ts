@@ -21,6 +21,9 @@ import { TypeOrmModuleOptions } from '@nestjs/typeorm';
       imports: [ConfigModule],
       inject: [ConfigService],
       useFactory: (config: ConfigService): TypeOrmModuleOptions => {
+        //AWSではsslだったがGCEでは外に出ないからsslなしで接続
+        const useSsl = config.get<string>('DB_SSL') === 'true';
+
         const dbConfig: TypeOrmModuleOptions = {
           type: 'postgres',
           host: config.get<string>('DB_HOST'),
@@ -29,16 +32,19 @@ import { TypeOrmModuleOptions } from '@nestjs/typeorm';
           password: config.get<string>('DB_PASSWORD'),
           database: config.get<string>('DB_DATABASE'),
           entities: [DiaryEntry],
-          synchronize: true,
-          ssl: true,
-          extra: {
-            ssl: {
-              rejectUnauthorized: false,
-            },
-          },
+          synchronize: config.get<string>('DB_SYNCHRONIZE') === 'true',
+          ssl: useSsl,
+          ...(useSsl
+            ? {
+                extra: {
+                  ssl: {
+                    rejectUnauthorized: false,
+                  },
+                },
+              }
+            : {}),
         };
       
-        console.log('Connecting to DB:', dbConfig);
         return dbConfig;
       },      
     }),

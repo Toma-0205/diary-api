@@ -16,7 +16,7 @@ async function bootstrap() {
   // app.enableCors({ origin: 'http://localhost:5173' }) 
 
   app.enableCors({
-    origin: 'https://d3cfki9qvzwayq.cloudfront.net', // フロントエンドのドメインを許可
+    origin: process.env.CORS_ORIGIN, // フロントエンドのドメインを許可
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: true,
   });
